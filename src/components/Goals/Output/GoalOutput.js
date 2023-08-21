@@ -12,25 +12,27 @@ import Card from "../../UI/Card";
 import Button from "../../UI/Button";
 
 const GoalOutput = (props) => {
-  const removeGoalHandler = (event) => {};
+  const { id, title, goal, onRemove } = props;
+
+  const removeGoalHandler = () => {
+    onRemove(id);
+  };
 
   return (
     <Card className="goal-output">
       <div className="goal-output__title">
-        <h1>{props.title}</h1>
+        <h1>{title}</h1>
       </div>
       <Card className="goal-output__goal">
-        <pre>{props.goal}</pre>
+        <pre>{goal}</pre>
       </Card>
-      <div>
-        <Button className="goal-output__button" onClick={removeGoalHandler}>
-          <img
-            className="goal-output__button-img"
-            src={removeButton}
-            alt="remove button"
-          />
-        </Button>
-      </div>
+      <Button className="goal-output__button" onClick={removeGoalHandler}>
+        <img
+          className="goal-output__button-img"
+          src={removeButton}
+          alt="remove button"
+        />
+      </Button>
     </Card>
   );
 };

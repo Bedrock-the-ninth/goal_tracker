@@ -24,11 +24,22 @@ const App = () => {
   /* Now the userGoal, after clicking the button `Add +`
   will be set to the value that the user entered as a goal*/
 
+  const removeHandler = (id) => {
+    setUserGoal((prevState) => prevState.filter((goal) => goal.id != id));
+  };
+  //Now after remove button being clicked, the selected item will be removed
+
   return (
     <div>
       <GoalInput onSubmit={onFormSubmitHandler} />
       {userGoal.map((goal) => (
-        <GoalOutput key={goal.id} title={goal.title} goal={goal.goal} />
+        <GoalOutput
+          key={goal.id}
+          id={goal.id}
+          title={goal.title}
+          goal={goal.goal}
+          onRemove={removeHandler}
+        />
       ))}
     </div>
   );
