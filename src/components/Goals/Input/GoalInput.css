@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
+
+.goal-input{
+    width: 70%;
+    margin: 2rem auto;
+    padding: 1.5rem 1rem 1.5rem;
+    background-color: #FF6969; 
+}
+
+.goal-input__header{
+    display: flex;
+    flex-direction: column;
+}
+
+.goal-input__label{
+    color: #FFF5E0;
+}
+
+.goal-input__input-goal{
+    color: #141E46;
+    font-size: large;
+    width: 90%;
+    height: 60%;
+    line-height: 1.5;
+    margin: auto;
+    text-align: start;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    outline: 0px;
+    padding: 3%;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 300;
+    font-size: medium;
+}
+.goal-input__input-title{
+    color: #141E46;
+    font-size: large;
+    width: 40%;
+    height: 3rem;
+    line-height: 1.5;
+    margin: 1rem auto 1.5rem;
+    text-align: center;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    outline: 0px;
+    padding: 3%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: large;
+}
+
+.goal-input__input:focus, 
+.goal-input__input:active{
+    border: 3px solid #BB2525;
+}
+
+
+.goal-input__button{
+    width: 30%;
+    height:2rem;
+    margin: 10px auto 10px;
+}
+
+
+@media (max-width: 1200px) {
+    .goal-input__input{
+        width: 90%;
+
+    }
+    
+}
