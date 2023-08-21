@@ -13,6 +13,16 @@
     flex-direction: column;
 }
 
+.goal-input__header.invalid label{
+    color: #BB2525;
+}
+
+.goal-input__header.invalid input,
+.goal-input__header.invalid textarea{
+    border-color: #BB2525;
+    background-color: #ffd7d7;
+}
+
 .goal-input__label{
     color: #FFF5E0;
 }
@@ -32,6 +42,8 @@
     font-family: 'Roboto Mono', monospace;
     font-weight: 300;
     font-size: medium;
+    border-color: #ccc;
+
 }
 .goal-input__input-title{
     color: #141E46;
@@ -48,6 +60,7 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     font-size: large;
+    border-color: #ccc;
 }
 
 .goal-input__input:focus, 
