@@ -63,8 +63,10 @@
     border-color: #ccc;
 }
 
-.goal-input__input:focus, 
-.goal-input__input:active{
+.goal-input__input-title:focus, 
+.goal-input__input-title:active,
+.goal-input__input-goal:focus, 
+.goal-input__input-goal:active{
     border: 3px solid #BB2525;
 }
 
@@ -76,8 +78,8 @@
 }
 
 
-@media (max-width: 1200px) {
-    .goal-input__input{
+@media (max-width: 1000px) {
+    .goal-input__input-title{
         width: 90%;
 
     }
