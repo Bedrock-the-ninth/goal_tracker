@@ -52,12 +52,6 @@ const GoalInput = (props) => {
     }
   };
 
-  let invalid = "";
-
-  if (!isValid) {
-    invalid = "invalid";
-  }
-
   return (
     <Card className="goal-input">
       <form
