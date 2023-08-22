@@ -1,4 +1,4 @@
-//React Imports
+//Library Imports
 import React from "react";
 
 //CSS Imports

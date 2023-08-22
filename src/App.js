@@ -1,4 +1,4 @@
-//React Imports
+//Library Imports
 import React, { useState } from "react";
 
 //CSS Imports
