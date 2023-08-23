@@ -2,13 +2,13 @@
 import React from "react";
 
 //CSS Imports
-import style from "./Button.module.css";
+import styles from "./Button.module.css";
 
 //JS imports
 
 const Button = (props) => {
   let contentOfTag = props.children;
-  let classes = style.button + " " + props.className;
+  let classes = styles.button + " " + props.className;
   let typeOfButton = props.type;
 
   const clickHandler = (event) => {

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 // CSS Imports
-import "./GoalInput.css";
+import styles from "./GoalInput.module.css";
 
 //JS Imports
 import Card from "../../UI/Card";
@@ -50,35 +50,35 @@ const GoalInput = (props) => {
     } else {
       props.onSubmit(enteredInput);
     }
+
+    setEnteredInput({
+      title: "",
+      goal: "",
+    });
   };
 
+  let classes = `${styles["goal-input"]} ${!isValid && styles.invalid}`;
+
   return (
-    <Card className="goal-input">
-      <form
-        className={`goal-input__header ${invalid}`}
-        onSubmit={formSubmitHandler}
-      >
-        <label className="goal-input__label">
+    <Card className={classes}>
+      <form onSubmit={formSubmitHandler}>
+        <label>
           <h2>Input your goals here to be kept:</h2>
         </label>
 
         <input
           type="text"
-          className="goal-input__input-title"
           placeholder="Your Goal"
           value={enteredInput.title}
           onChange={goalTitleChangeHandler}
         />
 
         <textarea
-          className="goal-input__input-goal"
           placeholder="Description"
           value={enteredInput.goal}
           onChange={goalInputChangeHandler}
         />
-        <Button type="submit" className="goal-input__button">
-          Add +
-        </Button>
+        <Button type="submit">Add +</Button>
       </form>
     </Card>
   );

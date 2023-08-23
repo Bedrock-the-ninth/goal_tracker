@@ -2,7 +2,7 @@
 import React from "react";
 
 //CSS Imports
-import "./GoalOutput.css";
+import styles from "./GoalOutput.module.css";
 
 //Image Import
 import removeButton from "../../img/icons8-close-button-64.png";
@@ -19,16 +19,19 @@ const GoalOutput = (props) => {
   };
 
   return (
-    <Card className="goal-output">
-      <div className="goal-output__title">
+    <Card className={styles["goal-output"]}>
+      <div className={styles["goal-output__title"]}>
         <h1>{title}</h1>
       </div>
-      <Card className="goal-output__goal">
+      <Card className={styles["goal-output__goal"]}>
         <pre>{goal}</pre>
       </Card>
-      <Button className="goal-output__button" onClick={removeGoalHandler}>
+      <Button
+        className={styles["goal-output__button"]}
+        onClick={removeGoalHandler}
+      >
         <img
-          className="goal-output__button-img"
+          className={styles["goal-output__button-img"]}
           src={removeButton}
           alt="remove button"
         />
