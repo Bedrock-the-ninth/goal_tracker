@@ -11,14 +11,8 @@ const Button = (props) => {
   let classes = styles.button + " " + props.className;
   let typeOfButton = props.type;
 
-  const clickHandler = (event) => {
-    if (props.onClick) {
-      props.onClick(event);
-    }
-  };
-
   return (
-    <button type={typeOfButton} className={classes} onClick={clickHandler}>
+    <button type={typeOfButton} className={classes} onClick={props.onClick}>
       {contentOfTag}
     </button>
   );

@@ -29,7 +29,6 @@ const App = () => {
   };
   //Now after remove button being clicked, the selected item will be removed
 
-  console.log(userGoal);
   return (
     <div>
       <GoalInput onSubmit={onFormSubmitHandler} />

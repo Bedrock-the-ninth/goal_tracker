@@ -7,6 +7,7 @@ import styles from "./GoalInput.module.css";
 //JS Imports
 import Card from "../../UI/Card";
 import Button from "../../UI/Button";
+import ErrorModal from "../../UI/ErrorModal";
 
 const GoalInput = (props) => {
   //To get and verify the incoming input we have to set a state for it
@@ -16,7 +17,11 @@ const GoalInput = (props) => {
   });
 
   //To verify that usered inputted something
-  const [isValid, setIsValid] = useState(true);
+  const [error, setError] = useState({
+    isValid: true,
+    title: null,
+    message: null,
+  });
 
   //With every key stroke in goal title section,
   //this function updates the enteredInput.title
@@ -25,7 +30,12 @@ const GoalInput = (props) => {
       title: event.target.value,
       goal: prevState.goal,
     }));
-    setIsValid(true);
+
+    setError({
+      isValid: true,
+      title: null,
+      message: null,
+    });
   };
 
   //With every key stroke in goal input section,
@@ -35,7 +45,12 @@ const GoalInput = (props) => {
       title: prevState.title,
       goal: event.target.value,
     }));
-    setIsValid(true);
+
+    setError({
+      isValid: true,
+      title: null,
+      message: null,
+    });
   };
 
   //Designed to send the entered information back to
@@ -45,7 +60,11 @@ const GoalInput = (props) => {
     event.preventDefault();
 
     if (enteredInput.title.trim() == 0 || enteredInput.goal.trim() == 0) {
-      setIsValid(false);
+      setError({
+        isValid: false,
+        title: "Empty Values",
+        message: "Please fill in the input fields!",
+      });
       return;
     } else {
       props.onSubmit(enteredInput);
@@ -57,30 +76,46 @@ const GoalInput = (props) => {
     });
   };
 
-  let classes = `${styles["goal-input"]} ${!isValid && styles.invalid}`;
+  // To handle the clicks after the modal is shown
+  const errorHandler = () => {
+    setError({
+      isValid: true,
+      title: null,
+      message: null,
+    });
+  };
 
   return (
-    <Card className={classes}>
-      <form onSubmit={formSubmitHandler}>
-        <label>
-          <h2>Input your goals here to be kept:</h2>
-        </label>
-
-        <input
-          type="text"
-          placeholder="Your Goal"
-          value={enteredInput.title}
-          onChange={goalTitleChangeHandler}
+    <div>
+      {!error.isValid && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
         />
+      )}
+      <Card className={styles["goal-input"]}>
+        <form onSubmit={formSubmitHandler}>
+          <label>
+            <h2>Input your goals here to be kept:</h2>
+          </label>
 
-        <textarea
-          placeholder="Description"
-          value={enteredInput.goal}
-          onChange={goalInputChangeHandler}
-        />
-        <Button type="submit">Add +</Button>
-      </form>
-    </Card>
+          <input
+            type="text"
+            placeholder="Your Goal"
+            value={enteredInput.title}
+            onChange={goalTitleChangeHandler}
+          />
+
+          <textarea
+            placeholder="Description"
+            value={enteredInput.goal}
+            onChange={goalInputChangeHandler}
+          />
+          <Button type="submit">Add +</Button>
+        </form>
+      </Card>
+    </div>
   );
 };
 
