@@ -1,5 +1,5 @@
 //Library Imports
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 // CSS Imports
 import styles from "./GoalInput.module.css";
@@ -10,48 +10,14 @@ import Button from "../../UI/Button";
 import ErrorModal from "../../UI/ErrorModal";
 
 const GoalInput = (props) => {
-  //To get and verify the incoming input we have to set a state for it
-  const [enteredInput, setEnteredInput] = useState({
-    title: "",
-    goal: "",
-  });
-
+  const enteredTitleRef = useRef();
+  const enteredGoalRef = useRef();
   //To verify that usered inputted something
   const [error, setError] = useState({
     isValid: true,
     title: null,
     message: null,
   });
-
-  //With every key stroke in goal title section,
-  //this function updates the enteredInput.title
-  const goalTitleChangeHandler = (event) => {
-    setEnteredInput((prevState) => ({
-      title: event.target.value,
-      goal: prevState.goal,
-    }));
-
-    setError({
-      isValid: true,
-      title: null,
-      message: null,
-    });
-  };
-
-  //With every key stroke in goal input section,
-  //this function updates the enteredInput.goal
-  const goalInputChangeHandler = (event) => {
-    setEnteredInput((prevState) => ({
-      title: prevState.title,
-      goal: event.target.value,
-    }));
-
-    setError({
-      isValid: true,
-      title: null,
-      message: null,
-    });
-  };
 
   //Designed to send the entered information back to
   //the parent component when the submit button is pressed
@@ -60,23 +26,41 @@ const GoalInput = (props) => {
     event.preventDefault();
 
     if (
-      enteredInput.title.trim().length === 0 ||
-      enteredInput.goal.trim().length === 0
+      enteredTitleRef.current.value.trim().length === 0 &&
+      enteredGoalRef.current.value.trim().length > 0
     ) {
       setError({
         isValid: false,
-        title: "Empty Values",
-        message: "Please fill in the input fields!",
+        title: "Empty Goal Title",
+        message: "Please fill in the Goal Title input field!",
       });
       return;
+    } else if (
+      enteredTitleRef.current.value.trim().length > 0 &&
+      enteredGoalRef.current.value.trim().length === 0
+    ) {
+      setError({
+        isValid: false,
+        title: "Empty Goal Description",
+        message: "Please fill in the Goal Description input field!",
+      });
+    } else if (
+      enteredTitleRef.current.value.trim().length === 0 &&
+      enteredGoalRef.current.value.trim().length === 0
+    ) {
+      setError({
+        isValid: false,
+        title: "Empty Inputs",
+        message: "Please fill in the empty input fields!",
+      });
     } else {
-      props.onSubmit(enteredInput);
+      props.onSubmit({
+        title: enteredTitleRef.current.value,
+        goal: enteredGoalRef.current.value,
+      });
+      enteredTitleRef.current.value = "";
+      enteredGoalRef.current.value = "";
     }
-
-    setEnteredInput({
-      title: "",
-      goal: "",
-    });
   };
 
   // To handle the clicks after the modal is shown
@@ -103,18 +87,9 @@ const GoalInput = (props) => {
             <h2>Input your goals here to be kept:</h2>
           </label>
 
-          <input
-            type="text"
-            placeholder="Your Goal"
-            value={enteredInput.title}
-            onChange={goalTitleChangeHandler}
-          />
+          <input type="text" placeholder="Your Goal" ref={enteredTitleRef} />
 
-          <textarea
-            placeholder="Description"
-            value={enteredInput.goal}
-            onChange={goalInputChangeHandler}
-          />
+          <textarea placeholder="Description" ref={enteredGoalRef} />
           <Button type="submit">Add +</Button>
         </form>
       </Card>
