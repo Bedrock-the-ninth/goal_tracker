@@ -30,7 +30,7 @@ const App = () => {
   //Now after remove button being clicked, the selected item will be removed
 
   return (
-    <div>
+    <>
       <GoalInput onSubmit={onFormSubmitHandler} />
       {userGoal.map((goal) => (
         <GoalOutput
@@ -41,7 +41,7 @@ const App = () => {
           onRemove={removeHandler}
         />
       ))}
-    </div>
+    </>
   );
 };
 

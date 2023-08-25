@@ -59,7 +59,10 @@ const GoalInput = (props) => {
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
-    if (enteredInput.title.trim() == 0 || enteredInput.goal.trim() == 0) {
+    if (
+      enteredInput.title.trim().length === 0 ||
+      enteredInput.goal.trim().length === 0
+    ) {
       setError({
         isValid: false,
         title: "Empty Values",
@@ -86,7 +89,7 @@ const GoalInput = (props) => {
   };
 
   return (
-    <div>
+    <>
       {!error.isValid && (
         <ErrorModal
           title={error.title}
@@ -115,7 +118,7 @@ const GoalInput = (props) => {
           <Button type="submit">Add +</Button>
         </form>
       </Card>
-    </div>
+    </>
   );
 };
 
